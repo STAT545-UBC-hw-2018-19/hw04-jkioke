@@ -7,5 +7,76 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(gapminder)
+library(tidyverse)
+
+```
+Make a tibble with one row per year and columns for life expectancy for two or more countries.
+
+    Use knitr::kable() to make this table look pretty in your rendered homework.
+    Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
+
+```{r}
+gapminder %>% 
+  filter(country == "Brazil" | country == "Argentina")
+```
+
+
+```{r}
+gather(gapminder,  key = "Soap", value = "Year", year, country)
+
+untidy <- gapminder %>% 
+  select(country, year, lifeExp) %>% 
+  filter(country == "Brazil" | country == "Argentina") %>% 
+  spread(key = "country", value = "lifeExp")
+ 
+rename(untidy, Year=year, "Argentina Life Expectancy"=Argentina, "Brazil Life Expectancy"=Brazil) %>% 
+  knitr::kable()
+```
+
+To easily represent the above table in a scatter plot, the life expectancy columns need to be combined again to make them tidy, and thus more easily read into a figure.
+
+```{r}
+tidy <- untidy %>% 
+  gather(key = "country", value = "lifeExp", Argentina, Brazil)
+tidy
+```
+
+And graph
+
+```{r}
+tidy %>% 
+  ggplot(aes(year,lifeExp, colour = country)) +
+  geom_point() +
+  labs(x = "Year", y = "Life Expectancy")
+  
+```
+
+
+Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:
+
+    One row per country, a country variable and one or more variables with extra info, such as language spoken, NATO membership, national animal, or capitol city.
+    One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.
+
+Looking at the Gapminder dataset, there are 142 levels of the "country" factor.
+```{r}
+gapminder$country %>% 
+  unique()
+```
+
+We can import a data frame of countries and their capitals
+
+```{r}
+capitals <- read_csv("capitals.csv")
+```
+Joining
+
+```{r}
+#joined <- inner_join(gapminder, capitals, "country")
+#joined$country %>% 
+#  unique()
+#anti_join(gapminder, capitals, "country") %>% 
+  
+
 ```
 
