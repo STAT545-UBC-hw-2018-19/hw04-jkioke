@@ -37,8 +37,8 @@ Chile,Santiago
 China,Beijing
 Colombia,Bogota
 Comoros,Moroni
-"Congo, Democratic Republic of the",Kinshasa
-"Congo, Republic of the",Brazzaville
+"Congo, Dem. Rep.",Kinshasa
+"Congo, Rep.",Brazzaville
 Costa Rica,San Jose
 Cote d'Ivoire,Yamoussoukro
 Croatia,Zagreb
@@ -83,7 +83,7 @@ Indonesia,Jakarta
 Iran,Tehran
 Iraq,Baghdad
 Ireland,Dublin
-Israel,Tel Aviv1
+Israel,Tel Aviv
 Italy,Rome
 Jamaica,Kingston
 Japan,Tokyo
@@ -92,6 +92,7 @@ Kazakhstan,Astana
 Kenya,Nairobi
 Kiribati,Tarawa Atoll
 Kosovo,Pristina
+"Hong Kong, China",none
 Kuwait,Kuwait City
 Kyrgyzstan,Bishkek
 Laos,Vientiane
@@ -120,16 +121,17 @@ Mongolia,Ulaanbaatar
 Montenegro,Podgorica
 Morocco,Rabat
 Mozambique,Maputo
-Myanmar (Burma),Nay Pyi Taw2
+Myanmar,Nay Pyi Taw
 Namibia,Windhoek
-Nauru,No official capital
 Nepal,Kathmandu
 Netherlands,Amsterdam
 New Zealand,Wellington
 Nicaragua,Managua
 Niger,Niamey
 Nigeria,Abuja
-North Korea,Pyongyang
+"Korea, Dem. Rep.",Pyongyang
+Puerto Rico,San Juan
+Reunion,Saint-Denis
 Northern Ireland,Belfast
 Norway,Oslo
 Oman,Muscat
@@ -148,7 +150,6 @@ Russia,Moscow
 Rwanda,Kigali
 Saint Kitts and Nevis,Basseterre
 Saint Lucia,Castries
-Saint Vincent and the Grenadines,Kingstown
 Samoa,Apia
 San Marino,San Marino
 Sao Tome and Principe,Sao Tome
@@ -159,12 +160,12 @@ Serbia,Belgrade
 Seychelles,Victoria
 Sierra Leone,Freetown
 Singapore,Singapore
-Slovakia,Bratislava
+Slovak Republic,Bratislava
 Slovenia,Ljubljana
 Solomon Islands,Honiara
 Somalia,Mogadishu
 South Africa,Pretoria
-South Korea,Seoul
+"Korea, Rep.",Seoul
 South Sudan,Juba
 Spain,Madrid
 Sri Lanka,Colombo
@@ -196,7 +197,7 @@ Vanuatu,Port Vila
 Vatican City,Vatican City
 Venezuela,Caracas
 Vietnam,Hanoi
-Wales,Cardiff
-Yemen,Sanaa
+"Yemen, Rep.",Sanaa
 Zambia,Lusaka
 Zimbabwe,Harare
+West Bank and Gaza,Jerusalem

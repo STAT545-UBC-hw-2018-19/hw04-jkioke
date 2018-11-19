@@ -11,20 +11,18 @@ library(gapminder)
 library(tidyverse)
 
 ```
-Make a tibble with one row per year and columns for life expectancy for two or more countries.
+###Part 1: Reshaping Gapminder
 
-    Use knitr::kable() to make this table look pretty in your rendered homework.
-    Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
+The following exercise will reshape the Gapminder data frame to explore life expectancies in Brazil and Argentina.
 
 ```{r}
 gapminder %>% 
   filter(country == "Brazil" | country == "Argentina")
 ```
 
+The `spread()` function can render the data more readable to the human eye in a tabulated form. 
 
 ```{r}
-gather(gapminder,  key = "Soap", value = "Year", year, country)
-
 untidy <- gapminder %>% 
   select(country, year, lifeExp) %>% 
   filter(country == "Brazil" | country == "Argentina") %>% 
@@ -42,7 +40,7 @@ tidy <- untidy %>%
 tidy
 ```
 
-And graph
+The tidied data can then be plotted relatively easily.
 
 ```{r}
 tidy %>% 
@@ -52,31 +50,47 @@ tidy %>%
   
 ```
 
+###Part 2: Joining Rows and Columns
 
-Create a second data frame, complementary to Gapminder. Join this with (part of) Gapminder using a dplyr join function and make some observations about the process and result. Explore the different types of joins. Examples of a second data frame you could build:
+If we wanted to include more variables per row, we will need to join variables from one data frame to another. Considering the Gapminder data frame holds data about countries, it would be prudent to know about how many countries are included in the dataset.
 
-    One row per country, a country variable and one or more variables with extra info, such as language spoken, NATO membership, national animal, or capitol city.
-    One row per continent, a continent variable and one or more variables with extra info, such as northern versus southern hemisphere.
-
-Looking at the Gapminder dataset, there are 142 levels of the "country" factor.
+Looking at the Gapminder dataset, it appears there are 142 levels of the "country" factor. 
 ```{r}
 gapminder$country %>% 
   unique()
 ```
 
-We can import a data frame of countries and their capitals
+We can import a data frame of countries and their capitals that holds data about 200 countries.
 
 ```{r}
-capitals <- read_csv("capitals.csv")
+(capitals <- read_csv("capitals.csv"))
 ```
-Joining
+Joining the two data frames with `inner_join` adds a capital to each row of the Gapminder data frame that has a match in the "country" variable. Doing so will join a character vector and a factor, and the resultant variable will be coerced into a character vector.
 
 ```{r}
-#joined <- inner_join(gapminder, capitals, "country")
-#joined$country %>% 
-#  unique()
-#anti_join(gapminder, capitals, "country") %>% 
-  
+joined <- inner_join(gapminder, capitals, "country")
+joined$country %>% 
+  unique()
 
+```
+
+The "country" variable in the two data frames is not exactly the same. Using `anti_join()`, we can see all the countries present in the Capitals data frame that were not represented in Gapminder (60 total).
+
+```{r}
+anti_join(capitals, gapminder, "country")
+```
+We could use `full_join()` to add rows to Gapminder for each country in the Capitals data frame, though all variables besides "country" and "capital" will be empty.
+
+```{r}
+full_join(capitals, gapminder, "country")
+  
+```
+
+To check if the correct number of rows have been added to the data frame, we can use `is.na()` to count the number of rows for which "continent" is NA (all the rows added from the Capitals data frame). From the results of the `anti_join()` above, we know this number to be 60.
+
+```{r}
+full_join(capitals, gapminder, "country") %>% 
+  select(continent) %>% 
+  summarize_all(funs(sum(is.na(.))))
 ```
 
